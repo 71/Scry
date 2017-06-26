@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="Scry.Grégoire GEIS.9ce1fe84-6f45-4369-97e0-0bae20d9a109" Version="0.1" Language="en-US" Publisher="Grégoire GEIS" />
+    <DisplayName>Scry</DisplayName>
+    <Description xml:space="preserve">Visual Studio extension that provides the ability to run C# scripts, giving them access to the current Roslyn workspace.</Description>
+    <MoreInfo>https://github.com/6A/Scry</MoreInfo>
+    <Tags>roslyn;codegeneration;script</Tags>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[15.0, 16.0)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[15.0, 16.0)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    <Dependency Id="Microsoft.VisualStudio.MPF.15.0" DisplayName="Visual Studio MPF 15.0" d:Source="Installed" Version="[15.0]" />
+    <Dependency d:Source="Installed" Id="0b5e8ddb-f12d-4131-a71d-77acc26a798f" DisplayName="Roslyn Language Services" Version="[2.6.0,3.0)" />
+  </Dependencies>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
+    <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.Compiler" Version="[15.0,16.0)" DisplayName="C# and Visual Basic Roslyn compilers" />
+  </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+    <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="Template" />
+  </Assets>
+</PackageManifest>

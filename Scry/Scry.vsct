@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h" />
+  <Extern href="vsshlids.h" />
+
+  <Commands package="guidScryPackage">
+
+    <Groups>
+      <Group guid="guidScryPackageCmdSet" id="ScryProjGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_PROJECT" />
+      </Group>
+      
+      <Group guid="guidScryPackageCmdSet" id="ScryProjGroup" priority="0x0500">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
+      </Group>
+      
+      <Group guid="guidScryPackageCmdSet" id="ScryItemGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE" />
+      </Group>
+    </Groups>
+
+    <Buttons>
+
+      <Button guid="guidScryPackageCmdSet" id="cmdidRunProjectScriptsCommand" priority="0x0100" type="Button">
+        <Parent guid="guidScryPackageCmdSet" id="ScryProjGroup" />
+        <Icon guid="guidImages" id="bmpPic" />
+        
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+
+        <Strings>
+          <ButtonText />
+        </Strings>
+      </Button>
+      
+      <Button guid="guidScryPackageCmdSet" id="cmdidRunSelectedScriptsCommand" priority="0x0100" type="Button">
+        <Parent guid="guidScryPackageCmdSet" id="ScryItemGroup" />
+        <Icon guid="guidImages" id="bmpPic" />
+        
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+        
+        <Strings>
+          <ButtonText />
+        </Strings>
+      </Button>
+      
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\RunCommand.png" usedList="bmpPic" />
+    </Bitmaps>
+    
+  </Commands>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidScryPackage" value="{2d6aa5e5-4ce8-411e-85fd-e18167a3d194}" />
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidScryPackageCmdSet" value="{8771fa60-6d1d-4298-b676-64c5eda2b366}">
+      <IDSymbol name="ScryProjGroup" value="0x1020" />
+      <IDSymbol name="ScryItemGroup" value="0x1030" />
+      
+      <IDSymbol name="cmdidRunProjectScriptsCommand" value="0x0200" />
+      <IDSymbol name="cmdidRunSelectedScriptsCommand" value="0x0300" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{e17082b1-6f3f-4853-8c3d-1a202168d76a}">
+      <IDSymbol name="bmpPic" value="1" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

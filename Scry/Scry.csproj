@@ -58,8 +58,23 @@
     <Compile Include="ScryCodeGenerator.cs" />
     <Compile Include="ScryPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Template\Template.g.cs" />
-    <None Include="Template\Template.csx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\RunCommand.png" />
+    <Content Include="Resources\ScryPackage.png" />
+    <Content Include="Template\Template.csx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Template\Template.g.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Template\Template.vstemplate">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -296,9 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Template\Template.ico" />
-    <Content Include="Resources\RunCommand.png" />
-    <Content Include="Resources\ScryPackage.ico" />
-    <VSTemplate Include="Template\Template.vstemplate" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="E:\NuGet\repo\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

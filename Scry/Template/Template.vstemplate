@@ -1,0 +1,22 @@
+﻿<VSTemplate Type="Item" Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  
+  <TemplateData>
+    <DefaultName>Scry.csx</DefaultName>
+    <Name>Scry Script</Name>
+    <Description>This template produces a C# script that will be processed by Scry.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <Icon>Template.png</Icon>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <TemplateID>Scry.ScriptTemplate</TemplateID>
+  </TemplateData>
+  
+  <TemplateContent>
+    <References />
+    
+    <ProjectItem ReplaceParameters="true" ItemType="None"
+                 TargetFileName="$fileinputname$.$fileinputextension$" OpenInEditor="true">Template.csx</ProjectItem>
+    <ProjectItem ReplaceParameters="true" ItemType="Compile" DependentUpon="$fileinputname$.$fileinputextension$"
+                 TargetFileName="$fileinputname$.g.cs" OpenInEditor="false">Template.g.cs</ProjectItem>
+  </TemplateContent>
+  
+</VSTemplate>
