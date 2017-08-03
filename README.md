@@ -102,14 +102,14 @@ Context
 
     .WriteLine("public static class Files")
     .WriteLine('{')
-    .IncreaseIndentation(4):
+    .IncreaseIndentation(4);
 
 foreach (CSharpSyntaxTree tree in Trees)
     Context.WriteLine("public static readonly string {0} = \"{1}\";",
                       Path.GetFileNameWithoutExtension(tree.FilePath ?? ""), tree.FilePath);
     
 Context
-    .DecreateIndentation(4)
+    .DecreaseIndentation(4)
     .WriteLine('}')
 
     .WriteEnd();
