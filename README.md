@@ -28,20 +28,20 @@ By default, the following namespaces (and the matching references) are imported 
 * Microsoft.CodeAnalysis.CSharp.Syntax
 
 ### Globals
-Properties and methods of the [`Globals`](./Scry/ScriptRunner.cs) class are globally available in Scry scripts. Their definition is (roughly):
+Properties and methods of the [`Globals`](./Scry/ScriptRunner.cs) class are globally available in Scry scripts. Its definition is (roughly):
 ```csharp
 class Globals
 {
-    // Reference to itself
+    // Reference to itself.
     public Globals Context => this;
 
-    // VS Workspace
+    // VS Workspace.
     public VisualStudioWorkspace Workspace { get; }
     
-    // Project in which the script file is
+    // Project in which the script file is.
     public Project Project { get; }
 
-    // TextWriter for the generated file
+    // TextWriter for the generated file.
     public TextWriter Output { get; }
     
     // Extension of the generated file (default: '.g.cs').
@@ -60,9 +60,11 @@ class Globals
     // call WriteIndentation() before writing the given arguments.
     public bool AutoWriteIndentation { get; set; }
 
-    // Shortcuts to Output.WriteLine
+    // Shortcuts to Output.WriteLine.
     public Globals WriteLine(string format, params object[] args);
     public Globals WriteLine(params object[] args);
+    
+    // Shortcuts to Output.Write.
     public Globals Write(string format, params object[] args);
     public Globals Write(params object[] args);
 
@@ -126,3 +128,8 @@ You can nest the generated file by copying and pasting the following snippet in 
   </Compile>
 </ItemGroup>
 ```
+
+## Why not [Scripty](https://github.com/daveaglick/Scripty)?
+Scripty is much more stable, and has more features than Scry. However, using the former was impossible for me, due to [Scripty#50](https://github.com/daveaglick/Scripty/issues/50).
+
+Requiring a build for code generation simply isn't possible for me, which is why I created Scry instead. Unlike Scripty, it should be able to run in any C# project, even new ones.

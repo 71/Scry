@@ -1,14 +1,11 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
-using EnvDTE;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.LanguageServices;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 
 using Project = Microsoft.CodeAnalysis.Project;
 
@@ -86,7 +83,7 @@ namespace Scry
         /// <summary>
         /// Keeps track of changed workspaces.
         /// </summary>
-        private void WorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
+        private async void WorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
         {
             switch (e.Kind)
             {
@@ -94,6 +91,7 @@ namespace Scry
                 case WorkspaceChangeKind.SolutionRemoved:
                 case WorkspaceChangeKind.SolutionCleared:
                 case WorkspaceChangeKind.SolutionReloaded:
+                case WorkspaceChangeKind.ProjectRemoved:
                     return;
             }
 
@@ -101,12 +99,20 @@ namespace Scry
                 return;
 
             Project proj = Workspace.CurrentSolution.GetProject(e.ProjectId);
-            IVsHierarchy vsProj = Workspace.GetHierarchy(e.ProjectId);
 
             foreach (var script in proj.Documents)
             {
                 if (Path.GetExtension(script.FilePath) != ".csx")
                     continue;
+
+                using (StringWriter writer = new StringWriter())
+                {
+                    var sourceText = await script.GetTextAsync();
+
+                    sourceText.Write(writer);
+
+                    await ScriptRunner.RunAsync(script.FilePath, script.Project, writer.ToString());
+                }
             }
         }
     }

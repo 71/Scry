@@ -51,10 +51,10 @@ namespace Scry
 
         internal MemoryStream OutputStream { get; }
 
-        public Globals(string script, string projfile, VisualStudioWorkspace w)
+        public Globals(string script, Project project, VisualStudioWorkspace w)
         {
             Workspace = w;
-            Project = w.CurrentSolution.Projects.FirstOrDefault(x => x.FilePath == projfile);
+            Project = project;
 
             if (Project == null)
                 throw new Exception("Could not open project. Are you sure it has fully loaded?");
@@ -180,9 +180,9 @@ namespace Scry
         // In theory, ScriptRunner isn't used till the ScryPackage is initialized
         public static ErrorListProvider ErrorListProvider = new ErrorListProvider(ScryPackage.Instance);
 
-        public static async Task<(Globals globals, ScriptState<object> state, ImmutableArray<Diagnostic> diags, Exception exception)> RunAsync(string scriptpath, string proj, string content)
+        public static async Task<(Globals globals, ScriptState<object> state, ImmutableArray<Diagnostic> diags, Exception exception)> RunAsync(string scriptpath, Project project, string content)
         {
-            var globals = new Globals(scriptpath, proj, ScryPackage.GlobalWorkspace)
+            var globals = new Globals(scriptpath, project, ScryPackage.GlobalWorkspace)
             {
                 Extension = ".g.cs"
             };
@@ -234,8 +234,10 @@ namespace Scry
             foreach (string script in scripts)
             {
                 string content = File.ReadAllText(script);
+                string projfile = GetMatchingProject(script);
+                Project project = ScryPackage.GlobalWorkspace.CurrentSolution.Projects.FirstOrDefault(x => x.FilePath == projfile);
 
-                var (_,_,diags,ex) = await RunAsync(script, GetMatchingProject(script), content);
+                var (_,_,diags,ex) = await RunAsync(script, project, content);
 
                 foreach (var diag in diags)
                     Log(script, diag);
