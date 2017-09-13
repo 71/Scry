@@ -100,6 +100,9 @@ namespace Scry
 
             Project proj = Workspace.CurrentSolution.GetProject(e.ProjectId);
 
+            if (proj == null)
+                return;
+
             foreach (var script in proj.Documents)
             {
                 if (Path.GetExtension(script.FilePath) != ".csx")
